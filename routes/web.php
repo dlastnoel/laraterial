@@ -1,32 +1,60 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\AdminDashboardController;
+use App\Http\Controllers\Web\AuthenticationController;
+use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\UserDashboardController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('guest')->group(function () {
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('home.index');
 
-// require __DIR__.'/auth.php';
+    Route::controller(AuthenticationController::class)->group(function () {
 
-Route::get('/', function () {
+        Route::get('/login', 'create')
+            ->name('auth.create');
 
-    return Inertia::render('App/Test');
+        Route::post('/login', 'store')
+            ->name('auth.store');
+    });
+});
+
+Route::middleware('auth')->group(function () {
+
+    // admin dashboard
+    Route::controller(AdminDashboardController::class)->group(function () {
+
+        Route::get('/admin/dashboard', 'index')
+            ->name('admin.dashboard.index');
+    });
+
+    // user dashboard
+    Route::controller(UserDashboardController::class)->group(function () {
+
+        Route::get('/user/dashboard', 'index')
+            ->name('user.dashboard.index');
+    });
+
+    // users
+    Route::controller(UserController::class)->group(function () {
+
+        Route::get('/users', 'index')
+            ->name('users.index');
+
+        Route::get('/users/create', 'create')
+            ->name('users.create');
+
+        Route::post('/users', 'store')
+            ->name('users.store');
+
+        Route::get('/users/{user}/edit', 'edit')
+            ->name('users.edit');
+
+        Route::put('/users/{user}', 'update')
+            ->name('users.update');
+    });
 });
