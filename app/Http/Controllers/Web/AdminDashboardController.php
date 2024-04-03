@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AdminDashboardController
 {
@@ -11,7 +12,7 @@ class AdminDashboardController
      */
     public function index()
     {
-        //
+        return Inertia::render('App/Admin/Dashboard/Index');
     }
 
     /**

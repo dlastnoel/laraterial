@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Contracts\Filters\Filterable;
+
+class {{ class }} implements Filterable
+{
+    public static function get()
+    {
+
+    }
+}

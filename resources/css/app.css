@@ -1,3 +1,11 @@
 *, html, body {
   font-family: 'Poppins', sans-serif !important;
 }
+
+.white-space-wrap {
+  white-space: break-spaces !important;
+}
+
+.v-expansion-panel-title__overlay {
+  background-color: #ffffff !important;
+}

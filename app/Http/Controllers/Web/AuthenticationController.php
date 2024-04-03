@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthenticateLoginFormRequest;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

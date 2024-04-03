@@ -9,7 +9,11 @@
         <v-form @submit.prevent="handleSubmit()">
           <v-row>
             <v-col cols="12">
-              <v-text-field variant="outlined" label="Username"></v-text-field>
+              <v-text-field
+                variant="outlined"
+                label="Username"
+                v-model="form.username"
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
@@ -20,6 +24,7 @@
                   !isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'
                 "
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                v-model="form.password"
               >
               </v-text-field>
             </v-col>
