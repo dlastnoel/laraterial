@@ -25,6 +25,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
+    // logout
+    Route::delete('/logout', [AuthenticationController::class, 'destroy'])
+        ->name('auth.destroy');
+
     // admin dashboard
     Route::controller(AdminDashboardController::class)->group(function () {
 

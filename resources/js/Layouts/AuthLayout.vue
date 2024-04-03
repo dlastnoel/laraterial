@@ -124,7 +124,7 @@ export default {
             return [
               userDashboard
             ]
-        }
+        } 
     }
       
   },
@@ -133,11 +133,9 @@ export default {
 
     handleLogout() {
 
-    this.$inertia.post(route('auth.logout'), '', {
+    this.$inertia.delete(route('auth.destroy'), {
     })
     }
   },
-
-        
 }
 </script>
