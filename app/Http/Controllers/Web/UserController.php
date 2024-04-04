@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $users = fn() => UserResource::collection(UserFilter::get());
 
-        $filters = fn() => $request->all();
+        $filters = fn() => $request->only('query', 'role', 'status', 'sort_by', 'direction', 'size');
 
         return Inertia::render('App/Users/Index', [
             'users' => $users,

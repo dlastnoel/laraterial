@@ -50,4 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function scopeFilter($query, $context)
+    {
+        return $query->whereAny(['firstname', 'middlename', 'lastname', 'name_extension', 'contact_no', 'username'], 'LIKE', '%' . $context . '%');
+    }
 }

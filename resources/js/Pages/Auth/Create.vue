@@ -1,4 +1,8 @@
 <template>
+  <Head>
+    <title>Login</title>
+  </Head>
+
   <v-app>
     <v-card class="pa-3" width="500">
       <v-card-item>
@@ -39,12 +43,14 @@
 </template>
 
 <script>
+import { Head } from '@inertiajs/vue3'
 import ButtonPrimary from '@/Components/ButtonPrimary.vue'
 import { useForm } from '@inertiajs/vue3'
 
 export default {
 
   components: {
+    Head,
     ButtonPrimary
   },
 
