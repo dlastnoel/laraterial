@@ -47,6 +47,10 @@ class AuthenticationController extends Controller
             }
         }
 
+        return back()->withErrors([
+            '419' => 'Invalid credentials.'
+        ]);
+
     }
 
     /**

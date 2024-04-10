@@ -8,23 +8,17 @@ const notyf = new Notyf({
   },
   types: [
     {
-      type: 'warning',
-      background: 'orange',
-      icon: {
-        className: 'material-icons',
-        tagName: 'i',
-        text: 'warning'
-      }
-    },
-    {
       type: 'error',
-      background: 'indianred',
-      dismissible: true
+      background: '#E57373',
+      dismissible: false,
+      icon: {
+        className: 'mdi mdi-alert-circle-outline text-white'
+      }
     },
     {
       type: 'info',
       background: '#1976D2',
-      dismissible: true,
+      dismissible: false,
       icon: {
         className: 'mdi mdi-information-variant text-white',
         tagName: 'i',
@@ -34,11 +28,10 @@ const notyf = new Notyf({
 })
 
 export default {
-  success: (message) => {
+  toast: (message, type = 'info') => {
     notyf.open({
-      type: 'info',
-      duration: 500000,
+      type: type,
       message: message
     })
-  }
+  },
 }

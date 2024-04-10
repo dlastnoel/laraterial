@@ -9,3 +9,8 @@
 .v-expansion-panel-title__overlay {
   background-color: #ffffff !important;
 }
+
+.notyf__toast {
+  border-radius: 7px !important;
+  max-width: 500px !important;
+}

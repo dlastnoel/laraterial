@@ -10,33 +10,56 @@
         <v-card-subtitle>Login to access your account.</v-card-subtitle>
       </v-card-item>
       <v-card-text>
-        <v-form @submit.prevent="handleSubmit()">
+        <Form as="v-form" @submit="handleSubmit">
           <v-row>
             <v-col cols="12">
-              <v-text-field
-                variant="outlined"
+              <Field
+                v-slot="{ field, errorMessage }"
+                name="username"
                 label="Username"
                 v-model="form.username"
-              ></v-text-field>
+                rules="required"
+              >
+                <v-text-field
+                  variant="outlined"
+                  label="Username"
+                  v-bind="field"
+                  :model-value="field.value"
+                  :error-messages="errorMessage"
+                >
+                </v-text-field>
+              </Field>
             </v-col>
             <v-col cols="12">
-              <v-text-field
-                type="password"
-                variant="outlined"
+              <Field
+                v-slot="{ field, errorMessage }"
+                name="password"
                 label="Password"
-                :append-inner-icon="
-                  !isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'
-                "
-                @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 v-model="form.password"
+                rules="required"
               >
-              </v-text-field>
+                <v-text-field
+                  type="password"
+                  variant="outlined"
+                  label="Password"
+                  :append-inner-icon="
+                    !isPasswordVisible
+                      ? 'mdi-eye-off-outline'
+                      : 'mdi-eye-outline'
+                  "
+                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                  v-bind="field"
+                  :model-value="field.value"
+                  :error-messages="errorMessage"
+                >
+                </v-text-field>
+              </Field>
             </v-col>
             <v-col cols="12">
               <ButtonPrimary type="submit" name="Login" width="100%" />
             </v-col>
           </v-row>
-        </v-form>
+        </Form>
       </v-card-text>
     </v-card>
   </v-app>
@@ -45,6 +68,7 @@
 <script>
 import { Head } from '@inertiajs/vue3'
 import ButtonPrimary from '@/Components/ButtonPrimary.vue'
+import { Form, Field } from 'vee-validate'
 import { useForm } from '@inertiajs/vue3'
 import notyf from '@/Composables/useNotyf'
 
@@ -52,7 +76,9 @@ export default {
 
   components: {
     Head,
-    ButtonPrimary
+    ButtonPrimary,
+    Field,
+    Form
   },
 
   data() {
@@ -68,10 +94,6 @@ export default {
     }
   },
 
-  created() {
-    notyf.success('Hello from notyf')
-  },
-
   methods: {
 
     handleSubmit() {
@@ -82,8 +104,13 @@ export default {
         preserveScroll: true,
 
         onError: (errors) => {
+          for(const i in errors){
+            notyf.toast(errors[i], 'error')
+          }
+        },
 
-          // do something with errors here
+        onSuccess: () => {
+          notyf.toast('Welcome!')
         }
       })
     }
