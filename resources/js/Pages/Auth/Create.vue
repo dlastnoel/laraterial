@@ -46,6 +46,7 @@
 import { Head } from '@inertiajs/vue3'
 import ButtonPrimary from '@/Components/ButtonPrimary.vue'
 import { useForm } from '@inertiajs/vue3'
+import notyf from '@/Composables/useNotyf'
 
 export default {
 
@@ -65,6 +66,10 @@ export default {
         password: '',
       })
     }
+  },
+
+  created() {
+    notyf.success('Hello from notyf')
   },
 
   methods: {

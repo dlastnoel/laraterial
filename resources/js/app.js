@@ -1,6 +1,9 @@
 import './bootstrap';
 import '../css/app.css';
 import '../css/poppins.css';
+import 'notyf/notyf.min.css';
+import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css'
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
