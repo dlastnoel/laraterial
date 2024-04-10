@@ -172,7 +172,7 @@ export default {
       filterOptions: {
         roles: ['admin', 'user'],
         statuses: ['Active','Deactivated', 'Terminated'],
-        sorting: ['Name', 'Username', 'Role', 'Status'],
+        sortings: ['Name', 'Username', 'Role', 'Status'],
         directions: defaultDirections,
         sizes: defaultSizes,
       }
